@@ -108,7 +108,6 @@
               (movie.badge ? '<span class="tag tag--accent">' + esc(movie.badge) + "</span>" : "") +
               '<span class="tag">' + esc(t("nav.movies")) + "</span>" +
               (movie.publicDomain ? '<span class="tag">Public domain</span>' : "") +
-              (translator ? '<span class="tag tag--accent">' + esc(SEEK.translatorLabel(movie)) + "</span>" : "") +
             "</div>" +
             "<h1>" + esc(movie.title) + "</h1>" +
             (movie.tagline ? '<p class="detail-tagline">' + esc(movie.tagline) + "</p>" : "") +

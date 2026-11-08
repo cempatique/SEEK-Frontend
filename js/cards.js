@@ -28,15 +28,6 @@
       SEEK.icon("bookmark") + "<span>" + esc(label) + "</span></button>";
   }
 
-  function languageTag(item) {
-    if (!item.translatorId) return "";
-    var tr = SEEK.get("translator", item.translatorId);
-    if (!tr) return "";
-    var lang = SEEK.translatorLabel(item);
-    var kind = tr.kind === "Dubbing" ? "Dub" : tr.kind === "Accessibility" ? "AD" : "Sub";
-    return '<span class="tag tag--accent">' + esc(lang) + " · " + esc(kind) + "</span>";
-  }
-
   function mediaCard(item, type, options) {
     options = options || {};
     var isShow = type === "show";
@@ -54,7 +45,7 @@
         (item.badge ? '<span class="card-badge">' + esc(item.badge) + "</span>" : "") +
         '<span class="card-type">' + esc(typeLabel) + "</span>" +
         '<div class="media-card__overlay">' +
-          '<div class="overlay-top">' + rating(item.rating) + languageTag(item) + "</div>" +
+          '<div class="overlay-top">' + rating(item.rating) + "</div>" +
           '<p class="overlay-synopsis">' + esc(item.synopsis) + "</p>" +
           '<div class="overlay-actions">' +
             '<button type="button" class="btn btn-primary btn-xs" data-trailer-type="' + type + '" data-trailer-id="' + esc(item.id) + '">' + SEEK.icon("play") + " " + esc(t("common.watchTrailer")) + "</button>" +
@@ -65,7 +56,7 @@
       '<div class="media-card__body">' +
         '<h3 class="media-card__title"><a href="' + href + '">' + esc(item.title) + "</a></h3>" +
         '<p class="media-card__meta">' + meta + "</p>" +
-        '<div class="media-card__tags">' + rating(item.rating) + languageTag(item) +
+        '<div class="media-card__tags">' + rating(item.rating) +
           (item.parts && item.parts.length > 1 ? '<span class="tag">' + item.parts.length + " parts</span>" : "") +
         "</div>" +
       "</div>" +

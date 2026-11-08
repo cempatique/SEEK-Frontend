@@ -111,7 +111,6 @@
             '<div class="tag-row">' +
               '<span class="tag tag--accent">' + esc(show.badge || "Series") + "</span>" +
               '<span class="tag">' + esc(t("nav.tv")) + "</span>" +
-              (translator ? '<span class="tag tag--accent">' + esc(SEEK.translatorLabel(show)) + "</span>" : "") +
             "</div>" +
             "<h1>" + esc(show.title) + "</h1>" +
             '<div class="detail-meta">' +

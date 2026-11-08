@@ -79,7 +79,7 @@
 
     var textSvg = "";
     if (!minimal) {
-      var topLabel = (item.translatorId ? SEEK.translatorLabel(item) : genre).toUpperCase();
+      var topLabel = genre.toUpperCase();
       if (item.badge) topLabel = String(item.badge).toUpperCase();
       textSvg += '<text x="' + (w * 0.075) + '" y="' + (h * 0.085) + '" font-family="Segoe UI, Arial, sans-serif" font-size="' + Math.round(w * 0.027) + '" letter-spacing="3" fill="' + p.accent + '" opacity="0.92">' + xmlEscape(topLabel) + '</text>';
       textSvg += '<text x="' + (w * 0.925) + '" y="' + (h * 0.085) + '" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="' + Math.round(w * 0.024) + '" letter-spacing="5" fill="' + p.ink + '" opacity="0.45">SEEK</text>';

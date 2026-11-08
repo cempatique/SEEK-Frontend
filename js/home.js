@@ -13,15 +13,26 @@
 
   function catalog() { return SEEK.getCatalog(); }
 
-  function heroItem() {
+  var heroTimer = null;
+  var heroIndex = 0;
+
+  function heroPool() {
     var cat = catalog();
     var pool = (cat.heroIds || []).map(function (id) {
       return SEEK.get("movie", id) || SEEK.get("show", id);
     }).filter(Boolean);
     if (!pool.length) pool = cat.movies.concat(cat.shows).filter(function (x) { return x.featured; });
     if (!pool.length) pool = cat.movies.slice().sort(byPopularity).slice(0, 4);
-    var seed = SEEK.hashString(SEEK.todayISO());
-    return pool[seed % pool.length];
+    return pool;
+  }
+
+  function startHeroRotation(mount, pool) {
+    if (heroTimer) clearInterval(heroTimer);
+    if (pool.length < 2) return;
+    heroTimer = setInterval(function () {
+      heroIndex = (heroIndex + 1) % pool.length;
+      mount.innerHTML = heroMarkup(pool[heroIndex]);
+    }, 6000);
   }
 
   function heroMarkup(item) {
@@ -133,7 +144,12 @@
     var ctaMount = SEEK.$("#home-cta");
     if (!heroMount || !shelvesMount) return;
 
-    heroMount.innerHTML = heroMarkup(heroItem());
+    var pool = heroPool();
+    if (pool.length) {
+      heroIndex = SEEK.hashString(SEEK.todayISO()) % pool.length;
+      heroMount.innerHTML = heroMarkup(pool[heroIndex]);
+      startHeroRotation(heroMount, pool);
+    }
     if (spotlightMount) spotlightMount.innerHTML = spotlightMarkup();
     if (moodMount) moodMount.innerHTML = moodMarkup();
     if (ctaMount) ctaMount.innerHTML = homeCtaMarkup();
